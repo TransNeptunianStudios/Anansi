@@ -1,6 +1,6 @@
-import Scene from './scene'
+import Scene from '../scene'
 
-import WaitEvent from './wait_event'
+import { WaitEvent} from '../events'; 
 
 export default class ExampleScene2 extends Scene {
     constructor(game) {

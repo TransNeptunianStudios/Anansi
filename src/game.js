@@ -2,7 +2,7 @@
 import Phaser from 'phaser'
 import Scene from './scene'
 
-import ExampleScene1 from './example_scene1'
+import ExampleScene1 from './scenes/example_scene1'
 
 export default class extends Phaser.State {
     init () {

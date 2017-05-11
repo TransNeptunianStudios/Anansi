@@ -1,7 +1,7 @@
-import Scene from './scene'
+import Scene from '../scene'
 
 import ExampleScene2 from './example_scene2'
-import ClickEvent from './click_event.js'
+import { ClickEvent } from '../events' 
 
 export default class ExampleScene1 extends Scene {
     constructor(game) {
