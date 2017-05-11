@@ -24,7 +24,7 @@ export default class extends Phaser.State {
 	    }, this)
 	})
 
-	this.game.input.onDown.add(()=>{
+	this.game.input.onDown.addOnce(()=>{
             this.state.start('MainMenu')
 	}, this)
     }
