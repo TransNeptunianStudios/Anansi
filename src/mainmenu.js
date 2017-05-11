@@ -8,7 +8,7 @@ export default class extends Phaser.State {
     create () {
 	this.game.camera.flash('#FFFFFF')
 
-	game.add.sprite(0,0, 'window');
+	game.add.sprite(0,0, 'menu');
 
 	var title_style = { font: "bold 32px Arial", fill: "#000"};
 	var note_style = { font: "bold 15px Arial", fill: "#000"};

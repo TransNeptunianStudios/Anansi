@@ -4,23 +4,30 @@ export default class Scene {
     constructor(game, background) {
 	this.game = game
 	this.background = background
-	this.onLevelComplete = new Phaser.Signal()
-    }
-
-    add_sprite(key, x, y) {
-	var sprite = game.add.sprite(x, y, key);
-	sprite.anchor.setTo(0)
-	return sprite
+	this.onComplete = new Phaser.Signal()
     }
 
     start() {
-	this.add_sprite(this.background, 0, 0)
+	console.log("Scene - start")
 
-	this.game.camera.onFlashComplete.addOnce(()=>{
-	    	this.onLevelComplete.dispatch()
+	this.game.add.sprite(0, 0, this.background)
+	this.game.camera.onFlashComplete.addOnce(this.story, this)
+	this.game.camera.flash('#000000')
+    }
+
+    story() {
+	console.log("Scene - story")
+	// implemented in derived class
+    }
+
+    end()
+    {
+	console.log("Scene - end")
+	this.game.camera.onFadeComplete.addOnce(()=>{
+	    	this.onComplete.dispatch()
 	}, this)
 
-	this.game.camera.flash('#000000')
+	this.game.camera.fade(0x000000);
     }
 
     update() {
