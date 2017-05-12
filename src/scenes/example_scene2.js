@@ -1,6 +1,6 @@
 import Scene from '../scene'
 
-import { WaitEvent} from '../events'; 
+import { TextEvent} from '../events';
 
 export default class ExampleScene2 extends Scene {
     constructor(game) {
@@ -12,7 +12,7 @@ export default class ExampleScene2 extends Scene {
 
 	console.log("ExampleScene2 - story")
 
-	this.push_event(new WaitEvent(this.game, 5))
+	this.push_event(new TextEvent(this.game, "De va en dag för länge sen..."))
 
 	//this.successor = new ExampleScene2(this.game);
 
