@@ -18,6 +18,10 @@ export default class Scene {
 	return this.events.pop()
     }
 
+    reverse_events(){
+	this.events.reverse()
+    }
+
     run_events(){
 	if (this.events.length == 0)
 	    this.end()
