@@ -2,7 +2,8 @@ import ClickEvent from './click_event';
 import StoryEvent from './story_event';
 import WaitEvent from './wait_event';
 import TextEvent from './text_event';
+import EnterEvent from './enter_event';
 
 export {
-    ClickEvent, StoryEvent, WaitEvent, TextEvent
+    ClickEvent, StoryEvent, WaitEvent, TextEvent, EnterEvent
 };

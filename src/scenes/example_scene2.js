@@ -3,6 +3,7 @@ import ExampleScene1 from './example_scene1'
 
 import { ClickEvent } from '../events'
 import { TextEvent} from '../events';
+import { EnterEvent} from '../events';
 
 export default class ExampleScene2 extends Scene {
     constructor(game) {
@@ -17,6 +18,9 @@ export default class ExampleScene2 extends Scene {
 	this.push_event(new ClickEvent(this.game))
 	this.push_event(new TextEvent(this.game, "De va en gång..."))
 	this.push_event(new TextEvent(this.game, "...och den va sandad. "))
+
+	this.push_event(new EnterEvent(this.game, 'duck1', 'left', 'slide'))
+
 	this.push_event(new TextEvent(this.game, "*badom-tish*"))
 	this.push_event(new TextEvent(this.game, "Lorem ipsum dolor sit amet, soleat voluptua ne sed, electram"));
 	this.push_event(new TextEvent(this.game,"convenire suavitate ius ad, tacimates percipitur ex vis. At porro inani numquam eam, nam eu quem illud ancillae"));

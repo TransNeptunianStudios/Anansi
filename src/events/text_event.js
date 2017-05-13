@@ -12,7 +12,7 @@ export default class TextEvent extends StoryEvent {
 	super.start()
 	console.log("TextEvent - start")
 	this.text_box = new TextBox(game, game.width*0.03, game.height*0.75, this.text)
-	var fadeInTween = this.game.add.tween(this.text_box.graphics).to({alpha: 1}, this.speed, Phaser.Easing.Linear.None, true)
+	var fadeInTween = this.game.add.tween(this.text_box.graphics).to({alpha: 0.8}, this.speed, Phaser.Easing.Linear.None, true)
 	fadeInTween.onComplete.addOnce(() => { 	this.game.input.onDown.addOnce(this.finish_printout, this) }, this);
 	fadeInTween.onComplete.addOnce(() => { this.text_box.runText();  }, this);
     }
