@@ -5,7 +5,7 @@ export default class TextEvent extends StoryEvent {
     constructor(game, text, origin) {
 	super(game)
 	this.text = text;
-	this.speed = 300
+	this.speed = 200
     }
 
     start() {

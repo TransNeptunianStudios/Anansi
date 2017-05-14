@@ -3,7 +3,7 @@ import ExampleScene1 from './example_scene1'
 
 import { ClickEvent } from '../events'
 import { TextEvent} from '../events';
-import { EnterEvent} from '../events';
+import { ActorFadeEvent} from '../events';
 
 export default class ExampleScene2 extends Scene {
     constructor(game) {
@@ -19,12 +19,15 @@ export default class ExampleScene2 extends Scene {
 	this.push_event(new TextEvent(this.game, "De va en gång..."))
 	this.push_event(new TextEvent(this.game, "...och den va sandad. "))
 
-	this.push_event(new EnterEvent(this.game, 'duck1', 'left', 'slide'))
+	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'left', 'in'))
 
 	this.push_event(new TextEvent(this.game, "*badom-tish*"))
+	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'left', 'out'))
+
+	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'right', 'in'))
 	this.push_event(new TextEvent(this.game, "Lorem ipsum dolor sit amet, soleat voluptua ne sed, electram"));
-	this.push_event(new TextEvent(this.game,"convenire suavitate ius ad, tacimates percipitur ex vis. At porro inani numquam eam, nam eu quem illud ancillae"));
 	this.push_event(new TextEvent(this.game," quo ne utroque suavitate urbanitas. Mea ubique patrioque at."));
+	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'right', 'out'))
 
 	this.reverse_events()
 	this.successor = new ExampleScene1(this.game);

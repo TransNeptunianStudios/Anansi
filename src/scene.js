@@ -8,6 +8,9 @@ export default class Scene {
 
 	this.events = []
 	this.curr_event = null;
+
+	this.left_actor = null
+	this.right_actor = null
     }
 
     push_event(event){
@@ -50,6 +53,10 @@ export default class Scene {
     {
 	console.log("Scene - end")
 	this.game.camera.onFadeComplete.addOnce(()=>{
+	    if (this.left_actor)
+		this.left_actor.destroy()
+	    if (this.right_actor)
+		this.right_actor.destroy()
 	    this.onComplete.dispatch()
 	}, this)
 
