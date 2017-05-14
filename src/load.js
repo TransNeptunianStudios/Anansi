@@ -12,10 +12,15 @@ export default class extends Phaser.State {
 	this.load.image('tnsLogo', './assets/images/tns-logo.png')
 	this.load.image('menu', './assets/images/menu_background.png')
 
+	// Scene backgrounds
 	this.load.image('duck_pond', './assets/images/duck_pond.png')
 	this.load.image('window', './assets/images/window.png')
 
+	// Actors
 	this.load.image('duck1', './assets/images/duck1.png')
+
+	// Sounds
+	this.load.audio('quack', './assets/sounds/quack.mp3')
 
     }
 
