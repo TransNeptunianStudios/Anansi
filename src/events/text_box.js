@@ -20,6 +20,7 @@ export default class TextBox{
 	    this.current_text += this.rtext;
 	    this.rtext = '';
 	    this.text.setText(this.current_text);
+	    this.game.input.onDown.addOnce(this.fadeOut, this)
 	}
 	else
 	    this.fadeOut();
