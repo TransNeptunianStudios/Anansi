@@ -4,6 +4,7 @@ import ExampleScene1 from './example_scene1'
 import { ClickEvent } from '../events'
 import { TextEvent} from '../events';
 import { ActorFadeEvent} from '../events';
+import { SoundEvent} from '../events';
 
 export default class ExampleScene2 extends Scene {
     constructor(game) {
@@ -19,7 +20,8 @@ export default class ExampleScene2 extends Scene {
 	this.push_event(new TextEvent(this.game, "De va en gång..."))
 	this.push_event(new TextEvent(this.game, "...och den va sandad. "))
 
-	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'left', 'in', 'quack'))
+	this.push_event(new SoundEvent(this.game, 'quack'))
+	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'left', 'in'))
 
 	this.push_event(new TextEvent(this.game, "*badom-tish*"))
 	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'left', 'out'))

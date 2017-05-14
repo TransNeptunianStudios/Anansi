@@ -2,12 +2,11 @@ import Phaser from 'phaser'
 import StoryEvent from './story_event'
 
 export default class ActorFadeEvent extends StoryEvent {
-    constructor(game, key, position, direction, sound) {
+    constructor(game, key, position, direction) {
 	super(game)
 	this.key = key;
 	this.position = position;
 	this.direction = direction;
-	this.sound = sound
     }
 
     setup_actor(key, position){
@@ -27,11 +26,6 @@ export default class ActorFadeEvent extends StoryEvent {
 	this.actor.anchor.setTo(0, 1)
     }
 
-    create_sound(){
-	if (this.sound)
-	    this.game.music = game.add.audio(this.sound).play()
-    }
-
     create_tween(actor, direction){
 	var fade_time = 1000;
 
@@ -43,7 +37,6 @@ export default class ActorFadeEvent extends StoryEvent {
 	    actor.alpha = 1;
 	    this.tween = this.game.add.tween(actor).to( { alpha: 0 }, fade_time);
 	}
-	this.tween.onComplete.addOnce(this.create_sound, this);
 	this.tween.onComplete.addOnce(this.end, this);
     }
 
