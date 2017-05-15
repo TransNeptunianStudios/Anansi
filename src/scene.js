@@ -17,19 +17,11 @@ export default class Scene {
 	this.events.push(event)
     }
 
-    pop_event(){
-	return this.events.pop()
-    }
-
-    reverse_events(){
-	this.events.reverse()
-    }
-
     run_events(){
 	if (this.events.length == 0)
 	    this.end()
 	else{
-	    this.curr_event = this.pop_event()
+	    this.curr_event = this.events.shift();
 	    this.curr_event.onComplete.addOnce(this.run_events,
 					       this)
 	    this.curr_event.start();

@@ -16,22 +16,19 @@ export default class ExampleScene2 extends Scene {
 
 	console.log("ExampleScene2 - story")
 
-	this.push_event(new ClickEvent(this.game))
-	this.push_event(new TextEvent(this.game, "De va en gång..."))
-	this.push_event(new TextEvent(this.game, "...och den va grusad. "))
+	this.push_event(new TextEvent(this.game, "Två änder har ett fasligt bråk..."))
 
 	this.push_event(new SoundEvent(this.game, 'quack'))
 	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'left', 'in'))
+	this.push_event(new TextEvent(this.game, "HÖRRE DU DU!", "Duckzen"))
 
-	this.push_event(new TextEvent(this.game, "HALLÅ", "Duckzen"))
-	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'left', 'out'))
-
+	this.push_event(new SoundEvent(this.game, 'quack'))
 	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'right', 'in'))
-	this.push_event(new TextEvent(this.game, "HEJ", "And"))
-	this.push_event(new TextEvent(this.game, "Lorem ipsum dolor sit amet, soleat voluptua ne sed, electram"));
-	this.push_event(new ActorFadeEvent(this.game, 'duck1', 'right', 'out'))
+	this.push_event(new TextEvent(this.game, "EH! DU SNACKAR!!", "Duckzens bror"))
 
-	this.reverse_events()
+	this.push_event(new TextEvent(this.game, "Vad dom bråkar om är oklart, men det är tydligt att de snart blir slagsmål!"))
+	this.push_event(new TextEvent(this.game, "Bryta isär dem innan nån skadar sig?"));
+
 	this.successor = new ExampleScene1(this.game);
 
 	this.run_events();
