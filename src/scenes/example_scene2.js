@@ -5,6 +5,7 @@ import { ClickEvent } from '../events'
 import { TextEvent} from '../events';
 import { ActorFadeEvent} from '../events';
 import { SoundEvent} from '../events';
+import { QuestionEvent} from '../events';
 
 export default class ExampleScene2 extends Scene {
     constructor(game) {
@@ -27,7 +28,7 @@ export default class ExampleScene2 extends Scene {
 	this.push_event(new TextEvent(this.game, "EH! DU SNACKAR!!", "Duckzens bror"))
 
 	this.push_event(new TextEvent(this.game, "Vad dom bråkar om är oklart, men det är tydligt att de snart blir slagsmål!"))
-	this.push_event(new TextEvent(this.game, "Bryta isär dem innan nån skadar sig?"));
+	this.push_event(new QuestionEvent(this.game, "Bryta isär dem innan nån skadar sig?"));
 
 	this.successor = new ExampleScene1(this.game);
 

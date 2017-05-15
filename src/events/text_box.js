@@ -32,6 +32,10 @@ export default class TextBox{
 	this.text.setText(this.current_text);
     }
 
+    addChoices(choices){
+	console.log("CHoices added");
+    }
+
     runText(){
 	this.current_text = '';
 	if(this.origin)
