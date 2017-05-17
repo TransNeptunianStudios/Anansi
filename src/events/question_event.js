@@ -12,7 +12,8 @@ export default class QuestionEvent extends StoryEvent {
     start() {
 	super.start()
 	console.log("TextEvent - start")
-	this.text_box = new TextBox(game, game.width*0.03, game.height*0.75, this.text);
+	this.text_box = new TextBox(game, game.width*0.03,
+				    game.height*0.75, this.text);
 	this.text_box.addChoices(this.choices)
 
 	this.text_box.finished.addOnce(this.end, this);
