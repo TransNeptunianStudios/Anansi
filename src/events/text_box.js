@@ -1,148 +1,123 @@
 import Phaser from 'phaser'
 
-export default class TextBox{
+export default class TextBox2 extends Phaser.Group{
 
-    fadeOut() {
-	var fadeOutTween = this.game.add.tween(this.graphics).to(
+    fadeIn(){
+	this.game.add.tween(this).to(
+	    {alpha: 1},
+	    this.fade_time,
+	    Phaser.Easing.Linear.None,
+	    true).onComplete.addOnce(
+		() => { this.runText(); }, this);
+    }
+
+    fadeOut(){
+	this.game.add.tween(this).to(
 	    {alpha: 0},
 	    this.fade_time,
 	    Phaser.Easing.Linear.None,
-	    true)
-
-	this.game.add.tween(this.text).to(
-	    {alpha: 0},
-	    this.fade_time,
-	    Phaser.Easing.Linear.None,
-	    true)
-
-	this.bonus_text.forEach(function(entry) {
-	    this.game.add.tween(entry).to(
-		{alpha: 0},
-		this.fade_time,
-		Phaser.Easing.Linear.None,
-		true)
-	}, this);
-
-	fadeOutTween.onComplete.addOnce(
-	    () => { this.finished.dispatch() }, this);
+	    true).onComplete.addOnce(
+		() => { this.finished.dispatch() }, this);
     }
 
-    fadeIn() {
-	var fadeInTween = this.game.add.tween(this.graphics).to(
-	    {alpha: 0.8},
-	    this.fade_time,
-	    Phaser.Easing.Linear.None,
-	    true)
-
-	fadeInTween.onComplete.addOnce(
-	    () => { this.runText();  }, this);
-    }
-
-    show_choices(){
-	this.bonus_text.forEach(function(entry) {
-	    entry.visible = true;
-	});
-
-	// For now
+    textFinish(){
+	this.game.input.onDown.removeAll();
 	this.game.input.onDown.addOnce(this.fadeOut, this)
-    }
-
-    fast_forward_text(){
 	this.game.time.events.remove(this.print_timer);
-	this.current_text += this.rtext;
-	this.rtext = '';
-	this.text.setText(this.current_text);
 
-	this.text_complete.dispatch()
+	this.text.setText(this.text.text + this.raw_text);
+	this.raw_text = "";
     }
 
-    print_next_letter(){
-	this.current_text += this.rtext[0];
-	this.rtext = this.rtext.substr(1);
-	this.text.setText(this.current_text);
-
-	if (this.rtext.length == 0){
-	    console.log("TEXT OUT")
-	    this.text_complete.dispatch()
+    printNextLetter(){
+	if(this.raw_text.length == 0)
+	    this.textFinish()
+	else{
+	    var text = this.text.text += this.raw_text[0];
+	    this.raw_text = this.raw_text.substr(1);
+	    this.text.setText(text)
 	}
-    }
-
-    text_out() {
-	if(this.game.input.onDown)
-	    this.game.input.onDown.dispose()
-
-	if(this.choices)
-	    this.show_choices();
-	else
-	    this.game.input.onDown.addOnce(this.fadeOut, this)
-    }
-
-    addChoices(choices){
-	this.choices = choices;
-	console.log("CHoices added");
     }
 
     runText(){
-	this.current_text = ''
-	var pos = {x: this.x + this.margin,
-		   y: this.y + this.margin}
-
-	if(this.origin){
-	    var label = game.add.text(pos.x, pos.y, this.origin + ":")
-	    this.bonus_text.push(label);
-	    pos.y += label.height;
-	}
-
-	this.text = game.add.text(pos.x, pos.y, this.current_text);
-	this.text.font = 'Lato';
-	this.text.fontSize = 30;
-	this.text.wordWrap = true;
-	this.text.wordWrapWidth = this.width-(this.margin*2);
-	this.text.addColor("#000000", 0);
-	pos.y += this.text.height;
-
-	if(this.choices){
-	    var choice = game.add.text(pos.x, pos.y, "a choice!")
-	    choice.visible = false;
-	    choice.inputEnabled = true;
-	    //choice.events.onInputOver.add(over, this);
-	    //choice.events.onInputDown.add(down, this);
-	    this.bonus_text.push(choice)
-	}
-
 	this.print_timer = game.time.events.repeat(
-	    this.text_speed,
-	    this.rtext.length,
-	    this.print_next_letter,
+	    100,
+	    this.raw_text.length+1,
+	    this.printNextLetter,
 	    this);
+	this.game.input.onDown.addOnce(this.textFinish, this)
+    }
 
-	this.game.input.onDown.addOnce(this.fast_forward_text, this)
+    addSprites(width, height){
+	var upper_left = this.create(0, 0, 'corner');
+	upper_left.anchor.setTo(1);
+
+	var upper = this.create(0, 0, 'straight');
+	upper.anchor.setTo(0, 1);
+	upper.width = width;
+
+	var upper_right = this.create(width, 0, 'corner');
+	upper_right.angle = 90
+	upper_right.anchor.setTo(1, 1);
+
+	var right = this.create(width, 0, 'straight');
+	right.anchor.setTo(0, 1);
+	right.angle = 90
+	right.width = height;
+
+	var low_left = this.create(0, height, 'corner');
+	low_left.angle = -90
+	low_left.anchor.setTo(1);
+
+	var left = this.create(0, 0, 'straight');
+	left.anchor.setTo(1, 1);
+	left.angle = -90
+	left.width = height;
+
+	var lower = this.create(0, height, 'straight');
+	lower.anchor.setTo(0, 1);
+	lower.angle = 180
+	lower.width = -width;
+
+	var low_right = this.create(width, height, 'corner');
+	low_right.angle = 180
+	low_right.anchor.setTo(1, 1);
+
     }
 
     constructor(game, x, y, raw_text, origin) {
-	this.game = game;
-	this.rtext = raw_text;
-	this.bonus_text = []
-	this.x = x;
-	this.y = y;
-	this.width = game.width-(x*2);
-	this.height = game.height-y-x;
-	this.margin = this.width*0.01
-	this.origin = origin
-	this.fade_time = 200;
-	this.text_speed = Phaser.Timer.SECOND * 0.05;
+	super(game)
+	this.x = x
+	this.y = y
+	this.alpha = 0
 
-	this.text_complete = new Phaser.Signal();
-	this.text_complete.addOnce(this.text_out, this);
-
+	this.fade_time = 500;
 	this.finished = new Phaser.Signal();
+	this.raw_text = raw_text;
 
-	this.graphics = game.add.graphics(x, y);
-	this.graphics.beginFill(0xFFFFFF);
-	this.graphics.drawRect(0, 0, this.width, this.height);
-	this.graphics.endFill();
-	this.graphics.alpha = 0;
+	var width = game.width - 2 * x
+	var height = game.height - y - x
 
+	var graphics = game.add.graphics(0, 0);
+	graphics.beginFill(0xFFFFFF);
+	graphics.drawRect(0, 0, width, height);
+	graphics.endFill();
+	this.add(graphics)
+
+	this.addSprites(width, height)
+
+	var text = ""
+	if (origin)
+	    text += origin + ": "
+
+	this.text = game.add.text( 0, 0, text)
+	this.text.font = 'Lato';
+	this.text.fontSize = 30;
+	this.text.wordWrap = true;
+	this.text.wordWrapWidth = width
+	this.text.addColor("#000000", 0);
+
+	this.add(this.text)
 	this.fadeIn()
     }
 }

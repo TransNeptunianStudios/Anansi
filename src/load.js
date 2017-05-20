@@ -19,6 +19,10 @@ export default class extends Phaser.State {
 	// Actors
 	this.load.image('duck1', './assets/images/duck1.png')
 
+	// Text box borders
+	this.load.image('corner', './assets/images/corner.png')
+	this.load.image('straight', './assets/images/straight.png')
+
 	// Sounds
 	this.load.audio('quack', './assets/sounds/quack.mp3')
 
