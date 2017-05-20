@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import StoryEvent from './story_event'
-import TextBox from './text_box.js'
+import TextBox from './text_box2.js'
 
 export default class QuestionEvent extends StoryEvent {
     constructor(game, text, choices) {
@@ -14,7 +14,7 @@ export default class QuestionEvent extends StoryEvent {
 	console.log("TextEvent - start")
 	this.text_box = new TextBox(game, game.width*0.03,
 				    game.height*0.75, this.text);
-	this.text_box.addChoices(this.choices)
+	// this.text_box.addChoices(this.choices)
 
 	this.text_box.finished.addOnce(this.end, this);
     }

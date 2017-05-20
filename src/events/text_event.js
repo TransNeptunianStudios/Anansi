@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 import StoryEvent from './story_event'
-import TextBox from './text_box.js'
+import TextBox from './text_box2.js'
 
 export default class TextEvent extends StoryEvent {
     constructor(game, text, origin) {
@@ -12,8 +12,9 @@ export default class TextEvent extends StoryEvent {
     start() {
 	super.start()
 	console.log("TextEvent - start")
-	this.text_box = new TextBox(game, game.width*0.03, game.height*0.75, this.text, this.origin)
-	this.text_box.finished.addOnce(this.end, this);
+	var text_box = new TextBox(game, game.width*0.03, game.height*0.75, this.text, this.origin)
+	text_box.finished.addOnce(this.end, this);
+	this.game.add.existing(text_box)
     }
 
     end(){
