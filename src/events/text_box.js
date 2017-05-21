@@ -22,11 +22,13 @@ export default class TextBox2 extends Phaser.Group{
 
     textFinish(){
 	this.game.input.onDown.removeAll();
-	this.game.input.onDown.addOnce(this.fadeOut, this)
 	this.game.time.events.remove(this.print_timer);
 
 	this.text.setText(this.text.text + this.raw_text);
 	this.raw_text = "";
+
+	if (!this.choices)
+	    this.game.input.onDown.addOnce(this.fadeOut, this)
     }
 
     printNextLetter(){
@@ -40,6 +42,7 @@ export default class TextBox2 extends Phaser.Group{
     }
 
     runText(){
+	this.alpha = 1;
 	this.print_timer = game.time.events.repeat(
 	    100,
 	    this.raw_text.length+1,
@@ -82,10 +85,23 @@ export default class TextBox2 extends Phaser.Group{
 	var low_right = this.create(width, height, 'corner');
 	low_right.angle = 180
 	low_right.anchor.setTo(1, 1);
-
     }
 
-    constructor(game, raw_text, origin) {
+    over(item) {
+	item.addColor("#999900", 0);
+    }
+
+    out(item) {
+	item.addColor("#000000", 0);
+    }
+
+    down(item) {
+	console.log(item.text);
+	item.answer_handle.dispatch()
+	this.fadeOut()
+    }
+
+    constructor(game, raw_text, origin, choices) {
 	super(game)
 	this.x = game.width*0.05;
 	this.y = game.height*0.75
@@ -116,8 +132,32 @@ export default class TextBox2 extends Phaser.Group{
 	this.text.wordWrap = true;
 	this.text.wordWrapWidth = width
 	this.text.addColor("#000000", 0);
-
 	this.add(this.text)
+
+	if(choices){
+	    this.choices = true
+	    var cx = 35
+	    choices.forEach(function(entry) {
+		var choice = game.add.text( cx,
+					    this.text.height,
+					    entry.text)
+		choice.font = 'Lato';
+		choice.fontSize = 30;
+		choice.bold = true
+		choice.addColor("#000000", 0);
+		cx += choice.width + 30
+
+		choice.inputEnabled = true;
+		choice.events.onInputOver.add(this.over, this);
+		choice.events.onInputOut.add(this.out, this);
+		choice.events.onInputDown.add(this.down, this);
+
+		choice.answer_handle = entry.handle
+
+		this.add(choice)
+	    }, this);
+	}
+
 	this.fadeIn()
     }
 }
