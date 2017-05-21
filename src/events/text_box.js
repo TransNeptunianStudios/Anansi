@@ -85,18 +85,18 @@ export default class TextBox2 extends Phaser.Group{
 
     }
 
-    constructor(game, x, y, raw_text, origin) {
+    constructor(game, raw_text, origin) {
 	super(game)
-	this.x = x
-	this.y = y
+	this.x = game.width*0.05;
+	this.y = game.height*0.75
 	this.alpha = 0
 
 	this.fade_time = 500;
 	this.finished = new Phaser.Signal();
 	this.raw_text = raw_text;
 
-	var width = game.width - 2 * x
-	var height = game.height - y - x
+	var width = game.width - 2 * this.x
+	var height = game.height - this.y - this.x//  should be x
 
 	var graphics = game.add.graphics(0, 0);
 	graphics.beginFill(0xFFFFFF);

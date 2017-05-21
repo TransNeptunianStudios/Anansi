@@ -22,7 +22,7 @@ export default class ExampleScene1 extends Scene {
 	var choices = [{text: "Ja!", handle: yes}, {text: "Nä!", handle: no}];
 	this.push_event(new QuestionEvent(this.game, "Gå upp ur sängen?", choices));
 
-		this.push_event(new TextEvent(this.game, "HÖRRE DU DU!", "Duckzen"))
+	this.push_event(new TextEvent(this.game, "HÖRRE DU DU!", "Duckzen"))
 
 	this.push_event(new TextEvent(this.game, "Det va en tidig morgon i maj, solen lyste varmt in i köket."))
 	this.push_event(new TextEvent(this.game, "Friden stördes av ett ljud utifrån..."))

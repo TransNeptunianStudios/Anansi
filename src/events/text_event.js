@@ -12,7 +12,7 @@ export default class TextEvent extends StoryEvent {
     start() {
 	super.start()
 	console.log("TextEvent - start")
-	var text_box = new TextBox(game, game.width*0.1, game.height*0.75, this.text, this.origin)
+	var text_box = new TextBox(game, this.text, this.origin)
 	text_box.finished.addOnce(this.end, this);
 	this.game.add.existing(text_box)
     }
