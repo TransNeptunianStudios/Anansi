@@ -1,11 +1,12 @@
 import Scene from '../scene'
 import ExampleScene1 from './example_scene1'
 
-import { ClickEvent } from '../events'
-import { TextEvent} from '../events';
-import { ActorFadeEvent} from '../events';
-import { SoundEvent} from '../events';
-import { QuestionEvent} from '../events';
+import { ClickEvent,
+	 WaitEvent,
+	 TextEvent,
+	 ActorFadeEvent,
+	 SoundEvent,
+	 QuestionEvent } from '../events'
 
 export default class ExampleScene2 extends Scene {
     constructor(game) {
