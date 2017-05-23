@@ -4,6 +4,7 @@ export default class Scene {
     constructor(game, background) {
 	this.game = game
 	this.background = background
+
 	this.onComplete = new Phaser.Signal()
 
 	this.events = []

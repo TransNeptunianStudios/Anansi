@@ -1,6 +1,8 @@
 /* globals __DEV__ */
 import Phaser from 'phaser'
+
 import Scene from './scene'
+import Player from './player'
 
 import ExampleScene1 from './scenes/example_scene1'
 import ExampleScene2 from './scenes/example_scene2'
@@ -31,6 +33,8 @@ export default class extends Phaser.State {
 
     create () {
 	console.log("Game")
+	this.game.player = new Player("[player name]")
+
 	this.curr_scene = new ExampleScene1(this.game)
 	this.curr_scene.onComplete.addOnce(this.next_scene, this)
 	this.curr_scene.start()

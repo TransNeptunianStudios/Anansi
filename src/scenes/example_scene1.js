@@ -27,7 +27,7 @@ export default class ExampleScene1 extends Scene {
 	this.push_event(new TextEvent(this.game, "Zzzz Zzzzz Zzz"))
 	this.push_event(new TextEvent(this.game, "Zzzz"))
 	this.push_event(new SoundEvent(this.game, 'quack'))
-	this.push_event(new TextEvent(this.game, "Du vaknar till lite av att något låter utanför."))
+	this.push_event(new TextEvent(this.game, "@name vaknar till av att något låter utanför."))
 
 	var yes = new Phaser.Signal();
 	var no = new Phaser.Signal();
