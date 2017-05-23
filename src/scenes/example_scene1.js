@@ -6,7 +6,8 @@ import { ClickEvent,
 	 TextEvent,
 	 ActorFadeEvent,
 	 SoundEvent,
-	 QuestionEvent } from '../events'
+	 QuestionEvent,
+	 NameEvent} from '../events'
 
 export default class ExampleScene1 extends Scene {
     constructor(game) {
@@ -26,6 +27,7 @@ export default class ExampleScene1 extends Scene {
 
 	console.log("ExampleScene1 - story")
 
+	this.push_event(new NameEvent(this.game))
 	this.push_event(new TextEvent(this.game, "Zzzz Zzzzz Zzz"))
 	this.push_event(new TextEvent(this.game, "Zzzz"))
 	this.push_event(new SoundEvent(this.game, 'quack'))

@@ -5,6 +5,7 @@ import TextEvent from './text_event';
 import ActorFadeEvent from './actor_fade_event';
 import SoundEvent from './sound_event';
 import QuestionEvent from './question_event';
+import NameEvent from './name_event';
 
 export {
     ClickEvent,
@@ -13,5 +14,6 @@ export {
     TextEvent,
     ActorFadeEvent,
     SoundEvent,
-    QuestionEvent
+    QuestionEvent,
+    NameEvent
 };
