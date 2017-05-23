@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
-
+import PhaserInputPackage  from 'phaser-input'
+const {PhaserInput} = PhaserInputPackage;  
 export default class extends Phaser.State {
     preload() {
 	// preload the loading indicator first before anything else
@@ -16,7 +17,7 @@ export default class extends Phaser.State {
 	this.game.stage.smoothed = false;
 
 	this.game.scale.setResizeCallback(this.gameResized, this);
-
+	this.game.add.plugin(PhaserInput.Plugin);
 	// start the Preloader state
 	this.state.start('Load')
     }
