@@ -11,23 +11,31 @@ export default class ExampleScene1 extends Scene {
 	super(game, 'window')
     }
 
+    getUp(){
+	this.push_event(new TextEvent(this.game, "Du tar dig ur sängen och klär på dig."))
+    }
+
+    sleepIn(){
+	this.push_event(new TextEvent(this.game, "Zzzz Zzzzz Zzz"))
+	this.push_event(new TextEvent(this.game, "Frammåt lunch släpar du dig ur sänge."))
+    }
     story() {
 	super.story()
 
 	console.log("ExampleScene1 - story")
 
+	this.push_event(new TextEvent(this.game, "Zzzz Zzzzz Zzz"))
+	this.push_event(new TextEvent(this.game, "Zzzz"))
+	this.push_event(new SoundEvent(this.game, 'quack'))
+	this.push_event(new TextEvent(this.game, "Du vaknar till lite av att något låter utanför."))
+
 	var yes = new Phaser.Signal();
 	var no = new Phaser.Signal();
-
 	var choices = [{text: "Ja!", handle: yes}, {text: "Nä!", handle: no}];
-	this.push_event(new QuestionEvent(this.game, "Gå upp ur sängen?", choices));
+	yes.addOnce(this.getUp, this);
+	no.addOnce(this.sleepIn, this);
+	this.push_event(new QuestionEvent(this.game, "Du är ganska trött, gå upp?", choices));
 
-	this.push_event(new TextEvent(this.game, "HÖRRE DU DU!", "Duckzen"))
-
-	this.push_event(new TextEvent(this.game, "Det va en tidig morgon i maj, solen lyste varmt in i köket."))
-	this.push_event(new TextEvent(this.game, "Friden stördes av ett ljud utifrån..."))
-	this.push_event(new SoundEvent(this.game, 'quack'))
-	this.push_event(new TextEvent(this.game, "Du sticker ut huvudet och tittar varifrån det märkliga ljudet kom ifrån"))
 
 	this.successor = new ExampleScene2(this.game);
 
