@@ -45,7 +45,7 @@ export default class TextBox extends Phaser.Group{
     runText(){
 	this.alpha = 1;
 	this.print_timer = game.time.events.repeat(
-	    20,
+	    2o0,
 	    this.raw_text.length+1,
 	    this.printNextLetter,
 	    this);
