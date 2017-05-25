@@ -72,7 +72,7 @@ export default class TextBox extends Phaser.Group{
 	this.y = game.height*0.75
 	this.alpha = 0
 
-	this.fade_time = 500;
+	this.fade_time = 300;
 	this.finished = new Phaser.Signal();
 	this.raw_text = raw_text.replace("@name", game.player.name)
 
